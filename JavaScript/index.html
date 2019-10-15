@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<title>javascript</title>
+</head>
+<body onload='main()'>
+<table id='tbl' border=1></table>
+</body>
+<script type='text/javascript'>;
+
+var r = "hello" ; /* keyword voor een variabel aan te maken : declaratie/ een variabel kunnen we een waarde geven/ global scope */
+        const l = "world" ; /*verplicht een waarde te geven , geen waarde : error/ const kan niet veranderd worden / const is block scope*/
+        console.log(r + " " + l); /* toont de waarde in de console (f12 webpage)*/
+    
+    /* data variables */
+    
+    var m = 1234567890; /* nummers kunnen bij elkaar opgeteld worden of afgetrokken/ vermenigvuldigd of gedeeld*/
+    const n = 12345678900;
+    console.log(m);
+    
+    
+    var a = "string"; /*string is gewoon text maar kan zowel nummers zijn als tekens*/
+    var b = "j";
+    var c = (b + a );
+    console.log(c);
+    
+    console.log(a+m);
+    
+    console.log(30>100); /*  Boolean : true of false statements*/
+    
+    
+    var e = "Ugandan "; /* array : meerdere values in een enkele var*/
+    var r = "Knuckles";
+    console.log(e+r);
+    
+    var verzameling = ["Do", "you", "know", "da", "wae?"];
+    console.log(verzameling[0],   verzameling[1] ,  verzameling[2],  verzameling[3],  verzameling[4]);
+    
+    // Operators
+
+    // Arithmetic operators
+    var x = 5;
+    var y = 2;
+    var z = x + y;
+    var z = 7;
+    // The addition operator (+) adds numbers
+    var x = 5;
+    var y = 2;
+    var z = x - y;
+    var z = 3;
+    // The subtraction operator (-) subtracts numbers
+    var x = 5;
+    var y = 2;
+    var z = x * y;
+    var z = 10;
+    // The multiplication operator (*) multiplies numbers
+    var x = 5;
+    var y = 2;
+    var z = x / y;
+    var z = 2.5;
+    //  The division operator (/) divides numbers
+    var x = 5;
+    var y = 2;
+    var z = x % y;
+    var z = 1;
+    // The modulus operator (%) returns the division remainder
+    var x = 5;
+    x++;
+    var z = x;
+    var z = 6;
+    // The increment operator (++) increments numbers
+    var x = 5;
+    x--;
+    var z = x;
+    var z = 4;
+    // The decrement operator (--) decrements numbers.
+    var x = 5;
+    var z = x ** 2; 
+    var z = 25;
+    // The exponentiation operator (**) raises the first operand to the power of the second operand
+
+    // Assignment operators
+    // +=   x += y   x = x + y
+    // -=   x -= y   x = x - y
+    // *=   x *= y   x = x * y
+    // /=   x /= y   x = x / y
+
+
+      function addCell(tr, val) {
+        var td = document.createElement('td');
+    
+        td.innerHTML = val;
+    
+        tr.appendChild(td)
+      }
+    
+    
+      function addRow(tbl, val_1, val_2, val_3) {
+        var tr = document.createElement('tr');
+    
+        addCell(tr, val_1);
+        addCell(tr, val_2);
+        addCell(tr, val_3);
+    
+        tbl.appendChild(tr)
+      }
+    
+      function main() {
+        tbl = document.getElementById('tbl');
+    
+        addRow(tbl, 'var x = 5', 'var z = x ** 2', '25');
+        addRow(tbl, '10 > 9', 'true', '');
+        addRow(tbl, 'var x = 5', 'x==8','false')
+        addRow(tbl, 'var txt = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"', 'var sln = txt.length', '26')
+        addRow(tbl, 'var x = 5', 'x==8','false')
+        addRow(tbl, 'number*string', 'NaN','')
+        addRow(tbl, 'number/null', 'infinity','')
+        addRow(tbl, 'boolean+string', 'truestring','falsestring')
+        
+      }
+    
+    </script>
+    
+    
+    
+    
+    
+    
+    </html>

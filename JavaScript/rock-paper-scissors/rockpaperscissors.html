@@ -3,54 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="CSS/stylesheet.css">
     <title>Rock, paper, scissors, ...</title>
 </head>
-
-<header>
-        <h1>Rock, Paper, Scissors....</h1>
-        <h2>Lizard, Spock!</h2>
-</header>
-
-
-
-
 <body>
+<h1>Rock, Paper, Scissors....</h1>
+<h2>Lizard, Spock!</h2>
 
-<!-----------------------------------------HTML------------------------------------------------>
-
-<div class="score-board">
-    <div id="user-label" class="badge">user</div>
-    <div id="computer-label" class="badge">comp</div>
-    <span id="user-score">0</span>:<span id="computer-score">0</span>
+<div>
+    <h3>Amount of players</h3>
+    <select name="players" id="players">
+        <option value="1">1 Player</option>
+        <option value="2">2 Players</option>
+    </select>
 </div>
 
-<div class="result">
+<div>
+    <h3>Player 1</h3>
+    <select name="p1choice" id="p1choice"></select>
+</div>
+
+<div>
+    <h3>Player 2</h3>
+    <select name="p2choice" id="p2choice" disabled></select>
+</div>
+
+<button id="play">Play</button>
+
+<div id="result"></div>
+
+<script>
+
+    // als er op de "play"knop gedrukt wordt , wordt de funtie uitgevoerd 
+    let play = document.getElementById("play");
+    play.addEventListener("click", playGame);
     
-</div>
+    // Select tag : kies aantal spelers , functie "changegame"
+    let players = document.getElementById("players");
+    players.addEventListener("change", changeGame);
 
+    //is de keuze voor "rock, paper of scissors" > select tag
+    let p1choice = document.getElementById("p1choice");
+    let p2choice = document.getElementById("p2choice");
 
-<div class="choices">
-    <div class="choice" id="r">
-        <img src="/resources/images/rock.png"  alt="rock" style="width: 50px" height="50px">
-    </div>
-    <div class="choice" id="p">
-        <img src="/resources/images/paper.png" alt="paper" style="width: 50px" height="50px">
-    </div>
-    <div class="choice" id="s">
-        <img src="/resources/images/scissors.png" alt="scissors" style="width:50px" height="50px">
-    </div>
-    <div class="choice" id="l">
-        <img src="/resources/images/lizard.png" alt="lizard" style="width: 50px" height="50px">
-    </div>
-    <div class="choice" id="s">
-        <img src="/resources/images/spock.png" alt="spock" style="width: 50px"height= "50px"; >
-    </div>
-</div>
+    // array van mogelijke opties
+    let choices = ["rock", "paper", "scissors"];
 
-<p id="action-message">Make your move!</p>
+    //aanmaken opties voor speler 1
+    for (choice of choices) {
+        let element = document.createElement("option");
+        element.value = choice;
+        element.innerHTML = choice;
+        p1choice.append(element);
+    }
 
-<!-----------------------------------------JavaScript------------------------------------------->
-<script src="app.js" charset="utf-8"></script>
+    //aanmaken opties voor speler 2 (mogelijk aan te maken in HTML)
+    for (choice of choices) {
+        let element = document.createElement("option");
+        element.value = choice;
+        element.innerHTML = choice;
+        p2choice.append(element);
+    }
+
+    //funtie als er op "play" word geklikt
+    function playGame(event){
+        let p1value = p1choice.value;
+        let p2value;
+        if (p2choice.disabled === false) {
+
+    // tegen speler 2 spelen
+            p2value = p2choice.value;
+            result(p1value, p2value);
+        
+
+        }
+        else {
+    // tegen pc spelen
+            p2value = choices[Math.floor(Math.random()*choices.length)];
+            result(p1value, p2value);
+        }
+    }
+    // funtie als aantal spelers wordt veranderd
+    function changeGame(event){
+        if (players.value === "1") {
+            p2choice.disabled = true;
+        }
+        else {
+            p2choice.disabled = false;
+        }
+    }
+
+    function result(p1value, p2value){
+       
+
+        let a = choices.indexOf(p1value);
+        let b = choices.indexOf(p2value);
+
+        let x = (a * choices.length ) + b;
+
+        switch(x) {
+            case 0:
+               document.getElementById("result").innerHTML = "it's a draw!";
+                break;
+            case 1:
+                document.getElementById("result").innerHTML = "player 2 chose Rock , Player 1 wins with Paper!";
+                break;
+            case 2:
+                 document.getElementById("result").innerHTML = "Player 2 chose scissors , Player 1 wins with rock!";
+                break;
+            case 3: document.getElementById("result").innerHTML = "Player 2 chose rock , Player 1 wins with paper!";
+                break;
+            case 4: document.getElementById("result").innerHTML = "it's a draw ";
+                break;
+            case 5: document.getElementById("result").innerHTML = "Player 2 chose paper , Player 1 wins with scissors!";
+                break;
+            case 6: document.getElementById("result").innerHTML = "Player 2 chose scissors , Player 1 wins with rock!";
+                break;
+            case 7: document.getElementById("result").innerHTML = "Player 2 chose paper , Player 1 wins with scissors!";
+                break;
+            case 8: document.getElementById("result").innerHTML = "it's a draw!";
+                
+        }
+    }
+</script>
 </body>
 </html>

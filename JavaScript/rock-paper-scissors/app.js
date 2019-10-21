@@ -1,5 +1,7 @@
 let userScore = 0;
 let computerScore = 0;
+let userChoice;
+let computerChoice;
 const userScore_span = document.getElementById("user-score");
 const computerScore_span = document.getElementById("computer-score");
 const scoreBoard_div = document.querySelector(".scoreboard");
@@ -17,7 +19,7 @@ function getComputerChoice() {
     const randomNumber = (Math.floor(Math.random() *5));
     return choices [randomNumber];
 }
-console.log(getComputerChoice());
+
 
 
 function convertToWord(letter){
@@ -31,43 +33,42 @@ function convertToWord(letter){
 
 
 
-
-function win(userChoice, ComputerChoice){
+function win(userChoice, computerChoice){
 userScore++;
 userScore_span.innerHTML = userScore;
 computerScore_span.innerHTML = computerScore;
 const smallUserWord = "user".fontsize(3).sup();
-const smallWord = "comp".fontsize(3).sup();
-result_p.innerHTML = `${convertToWord(userChoice)}${smallUserWord} beats ${converToWord(ComputerChoice)} ${smallCompWord}  you win!`;
+const smallCompWord = "comp".fontsize(3).sup();
+result_p.innerHTML = userChoice + "beats" + computerChoice + "you win!";
 }
 
-function lose(userChoice, ComputerChoice){
+
+function lose(userChoice, computerChoice){
     console.log("LOSE");
     computerScore++;
 userScore_span.innerHTML = userScore;
 computerScore_span.innerHTML = computerScore;
 const smallUserWord = "user".fontsize(3).sup();
-const smallWord = "comp".fontsize(3).sup();
-result_p.innerHTML = `${convertToWord(userChoice)}${smallUserWord} loses to ${converToWord(ComputerChoice)} ${smallCompWord}  you lost!`;
-}
+const smallCompWord = "comp".fontsize(3).sup();
+result_p.innerHTML = userChoice  + "LOSE" + computerChoice + "you lose!"
 
-function draw(userChoice, ComputerChoice){
+function draw(userChoice, computerChoice){
     console.log("DRAW");
 
 userScore_span.innerHTML = userScore;
 computerScore_span.innerHTML = computerScore;
 const smallUserWord = "user".fontsize(3).sup();
 const smallWord = "comp".fontsize(3).sup();
-result_p.innerHTML = `${convertToWord(userChoice)}${smallUserWord} it's a draw ${converToWord(ComputerChoice)} ${smallCompWord}  it's a draw!`;
+result_p.innerHTML = userChoice + "draw" + computerChoice + "it's a draw!";
 }
 
 
 
 function game(userChoice){
-const ComputerChoice = getComputerChoice();
+const computerChoice = getComputerChoice();
 console.log("user choice ==> " + userChoice);    
-console.log("computer choice ==> " + ComputerChoice);
-switch (userChoice + ComputerChoice){
+console.log("computer choice ==> " + computerChoice);
+switch (userChoice + computerChoice){
     case "rs":
     case "pr":
     case "sp":
@@ -78,7 +79,7 @@ switch (userChoice + ComputerChoice){
     case "lp":
     case "ps":
     case "sr":
-        win(userChoice,ComputerChoice);
+        win(userChoice,computerChoice);
         console.log("USER WINS");
         break;
         case "pr":
@@ -91,7 +92,7 @@ switch (userChoice + ComputerChoice){
         case "lp":
         case "ps":
         case "sr":
-        lose(userChoice,ComputerChoice);
+        lose(userChoice,computerChoice);
             console.log("USER LOSES");
             break;
     case "rr":
@@ -104,8 +105,8 @@ switch (userChoice + ComputerChoice){
     case "lp":
     case "ps":
     case "sr":
+        draw(userChoice,computerChoice);
         console.log("Its a draw");
-        draw(userChoice,ComputerChoice);
         break;
 
 }
@@ -129,7 +130,14 @@ function main(){
     game("s");
     
   })
+
+  lizard_div.addEventListener('click',function(){
+    game("l");
+  })
+
+  spock_div.addEventListener('click',function(){
+    game("sp");
+  })
 }
 
-main ();
-
+main();

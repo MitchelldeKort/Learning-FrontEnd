@@ -7,12 +7,14 @@ const result_p = document.querySelector(".result > p ");
 const rock_div = document.getElementById("r");
 const paper_div = document.getElementById("p");
 const scissors_div = document.getElementById("s");
+const lizard_div = document.getElementById("l");
+const spock_div = document.getElementById("sp");
 
 
 
 function getComputerChoice() {
-    const choices = ['r' , 'p' , 's'];
-    const randomNumber = (Math.floor(Math.random() *3));
+    const choices = ['r' , 'p' , 's', 'l' , 'sp'];
+    const randomNumber = (Math.floor(Math.random() *5));
     return choices [randomNumber];
 }
 console.log(getComputerChoice());
@@ -21,7 +23,9 @@ console.log(getComputerChoice());
 function convertToWord(letter){
     if (letter === "r") return "Rock";
     if (letter === "p") return "Paper";
-    return "scissors";
+    if (letter === "s") return "scissors";
+    if (letter === "l") return "lizard";
+    if (letter === "sp") return "spock";
 
 }
 
@@ -37,12 +41,24 @@ const smallWord = "comp".fontsize(3).sup();
 result_p.innerHTML = `${convertToWord(userChoice)}${smallUserWord} beats ${converToWord(ComputerChoice)} ${smallCompWord}  you win!`;
 }
 
-function lose(){
+function lose(userChoice, ComputerChoice){
     console.log("LOSE");
+    computerScore++;
+userScore_span.innerHTML = userScore;
+computerScore_span.innerHTML = computerScore;
+const smallUserWord = "user".fontsize(3).sup();
+const smallWord = "comp".fontsize(3).sup();
+result_p.innerHTML = `${convertToWord(userChoice)}${smallUserWord} loses to ${converToWord(ComputerChoice)} ${smallCompWord}  you lost!`;
 }
 
-function draw(){
+function draw(userChoice, ComputerChoice){
     console.log("DRAW");
+
+userScore_span.innerHTML = userScore;
+computerScore_span.innerHTML = computerScore;
+const smallUserWord = "user".fontsize(3).sup();
+const smallWord = "comp".fontsize(3).sup();
+result_p.innerHTML = `${convertToWord(userChoice)}${smallUserWord} it's a draw ${converToWord(ComputerChoice)} ${smallCompWord}  it's a draw!`;
 }
 
 
@@ -55,10 +71,24 @@ switch (userChoice + ComputerChoice){
     case "rs":
     case "pr":
     case "sp":
+    case "rl":
+    case "ls":
+    case "ss":
+    case "sl":
+    case "lp":
+    case "ps":
+    case "sr":
         win(userChoice,ComputerChoice);
         console.log("USER WINS");
         break;
-        case "rp":
+        case "pr":
+        case "ps":
+        case "rs":
+        case "rl":
+        case "ls":
+        case "ss":
+        case "sl":
+        case "lp":
         case "ps":
         case "sr":
         lose(userChoice,ComputerChoice);
@@ -67,6 +97,13 @@ switch (userChoice + ComputerChoice){
     case "rr":
     case "pp":
     case "ss":
+    case "rl":
+    case "rs":
+    case "ss":
+    case "sl":
+    case "lp":
+    case "ps":
+    case "sr":
         console.log("Its a draw");
         draw(userChoice,ComputerChoice);
         break;

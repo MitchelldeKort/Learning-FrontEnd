@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Exercises</title>
+</head>
+<body>
+
+    <ul class id="list">
+
+    </ul>
+
+   <title>Exercise 2</title>
+
+    <section id="ex2">
+   </section>
+
+   <style>
+
+       .list {
+           border: 2px;
+           border-block-color: blue;
+       }
+   
+   
+   
+   
+   
+   </style>
+    <script>
+    
+    
+    let aboutMe = {
+        "name": "Mitchell",
+        "age": "23",
+        "gender": "Male",
+        "favfood": "Spaghjet",
+        "favseries": "Suits",
+        "favmovies": "Black Hawk Down",
+        "single": "No, Album"
+    }; 
+  
+    
+    for(let key in aboutMe){
+        console.dir(aboutMe[key]);
+        let li=document.createElement("li");
+        li.innerHTML= aboutMe[key];
+        document.getElementById("list").appendChild(li);
+
+    }
+
+    function FamilyMember(name, age, gender, favfood, favseries, favmovies, single) {
+        this.name  = name;
+        this.age = age;
+        this.gender = gender;
+        this.favfood = favfood;
+        this.favseries = favseries;
+        this.favmovies = favmovies;
+        this.single = single;
+        this.display = function display(obj){
+
+            let ul= document.createElement("ul");
+            document.getElementById("ex2").appendChild(ul);
+
+            for(let key in obj){
+
+                if (key != "display") {
+                    console.dir(obj[key]);
+                let li=document.createElement("li");
+                li.innerHTML= obj[key];
+                ul.appendChild(li);
+                }
+
+
+            }
+
+            }
+    }
+
+
+    var myFather = new FamilyMember("Marc", 51, "Male", "BBQ", "Pawn Stars", "Classified", "Married");
+    console.dir(myFather);
+
+    var myMother = new FamilyMember("Anita", 56, "Female", "Hotdogs", "GTST", "None", "Married");
+    console.dir(myMother);
+
+    var mySister = new FamilyMember("Melanie", 27, "Female", "Pizza", "Unknown", "Hackiko", "Married");
+    console.dir(FamilyMember);
+
+    
+
+    myFather.display(myFather);
+    myMother.display(myMother);
+    mySister.display(mySister);
+    
+    
+    
+    
+    
+    </script>
+</body>
+</html>

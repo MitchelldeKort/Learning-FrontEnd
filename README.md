@@ -1,4 +1,6 @@
 # Learning-FrontEnd
-Working link with Front-End  related indexpage coming soon.
+Working link with Front-End  related indexpage.
 
-https://github.com/MitchelldeKort/Learning-FrontEnd
+https://mitchelldekort.github.io/Learning-FrontEnd/
+
+

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="resources/css/style.css">
+    <title>AJAX-Quotes</title>
+</head>
+<body>
+
+    <h3 id="quote"></h3>
+ <button id="button"> Random Quote Generator</button>
+
+<script>
+    document.getElementById('button').addEventListener('click', loadText);
+
+    function loadText(){
+        // XHR Obj.
+
+        var xhr = new XMLHttpRequest();
+        // OPEN - type , url/file, true/false (async)
+       xhr.open('GET', 'https://thatsthespir.it/api', true);
+       
+    
+     xhr.onload = function(){
+        if (this.status == 200){
+            let quote = JSON.parse(this.responseText);
+
+            let output = '';
+                output +=
+        
+                    '<h3 class="quote"> Quote: ' +quote.quote + '</h3>' +
+                    '<p class = "author"> Author: ' +quote.author +'</p>' +
+                    '<img class ="img" src ="' + quote.photo +'"><br>' +
+                    '<button id ="refresh"> Refresh </button>'
+
+
+
+                document.getElementById('quote').innerHTML = output;
+                document.getElementById('refresh').addEventListener('click', loadText);
+                    
+            }
+
+
+        
+        }
+
+        xhr.send();
+    }
+
+
+
+
+
+</script>
+
+</body>
+</html>

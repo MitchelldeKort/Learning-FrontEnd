@@ -1,7 +1,12 @@
 body{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: block;
+    text-align: center;
     background-color: gray;
+    background-image: url(../images/images.jpeg);
+    background-repeat: none;
+    background-size: 100%;
+}
+
+#quote{
+    color: white;
 }

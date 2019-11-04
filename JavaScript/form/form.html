@@ -14,26 +14,27 @@
 
       <legend>Personal Information</legend>
       <h1>Please fill out the following required fields :</h1>
-
+      <div class="container1">
         <label for="Firstname" >Firstname : <input type="text" id="Firstname" required></label><br>
         <label for="Lastname" >Lastname : <input type="text" id="Lastname" required></label><br>
         <label for="Username" >Username : <input type="text" id="Username" required></label><br>
-        <label for="Emailadress" >Email-adress : <input type="email" id="Emailadress" required></label><br>
-        <label for="Password" >Password : <input type="password" name="psw" id="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase letter, and at least 8 or more characters" required></label><br>
+        <label for="Emailadress" >Email-adress : <input type="email" id="Emailadress" pattern= ".+@gmail.com" required></label>Emailadress must end with "@gmail.com".<br>
+        <label for="Password" >Password : <input type="password" name="psw" id="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"required ></label> Must contain at least one number and one uppercase letter, and at least 8 or more characters.<br>
         <label for="Confirm password" >Confirm password : <input type="password" name="psw" id="Confirmpassword" required></label><br>
         <label for="Adress" >Adress : <input type="text" id="Adress" required></label><br>
         <label for="City" >City : <input type="text" id="City" required></label><br>
         <label for="Zip" >Zip : <input type="number" name="quantity" min="1" max="10000" id="Zip" required></label><br>
-        <input type="Submit" value="Submit" id="Submit"><br>
+      </div>
 
        <h1>Please fill out the following optional fields :</h1>
-
+      <div class="container2">
         <label for="Phonenumber">Phonenumber : <input type="tel" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" id="Phonenumber"></label><br>
         <label for="Age">Age : <input type="number" name="quantity" min="10" max="99" id="Age"></label><br>
         <label for="Hobbies">Hobbies : <input type="text" name="Hobbies" id="Hobbies"></label><br>
-        <input type="Submit" value="Submit" id="Submit"><br>
-
+        <input type="Submit" value="Submit" id="Submit" onclick="formcheck()"><br>
+      </div>
     </fieldset>
+
 </form>
 
 <script>
@@ -104,7 +105,73 @@ var upperCaseLetters = /[A-Z]/g;
 
 }
 
-</script>
+//password succes/fail
+let checkPassword = function () {
 
+function checkPassword(){
+if (document.getElementById('Password').value == document.getElementById('Confirmpassword').value) {
+    document.getElementById('message').style.color = 'green';
+    document.getElementById('message').innerHTML = 'matching';
+    alert ("password correct!")
+} else {
+    document.getElementById('message').style.color = 'red';
+    document.getElementById('message').innerHTML = 'not matching';
+}
+}
+}
+
+// errors
+let fcheck = document.getElementById('Submit')
+fcheck.addEventListener('click',formcheck);
+
+
+document.getElementById('Submit').addEventListener('click',formcheck);
+function formcheck() {
+let requiredFields = '';
+
+if (document.getElementById('Firstname').value == ''){
+requiredFields += "Fill in your firstname \n";
+document.getElementById('Firstname').style.borderColor = "red";
+}
+if (document.getElementById('Lastname').value == '') {
+requiredFields += "Fill in your lastname \n";
+document.getElementById('Lastname').style.borderColor = "red";
+}
+if (document.getElementById('Username').value == '') {
+requiredFields += "Fill in your Username \n";
+document.getElementById('Username').style.borderColor = "red";
+}
+if (document.getElementById('Emailadress').value == '') {
+requiredFields += "Fill in your Email \n";
+document.getElementById('Email').style.borderColor = "red";
+}
+if (document.getElementById('Password').value == '') {
+requiredFields += "Choose a password \n";
+document.getElementById('Password').style.borderColor = "red";
+}
+if (document.getElementById('Confirmpassword').value == '') {
+requiredFields += "Confirm your password \n";
+document.getElementById('Confirm-password').style.borderColor = "red";
+}
+if (document.getElementById('Adress').value == '') {
+requiredFields += "Fill in your adress \n";
+document.getElementById('Adress').style.borderColor = "red";
+}
+if (document.getElementById('City').value == '') {
+requiredFields += "Fill in the city where you live \n";
+document.getElementById('City').style.borderColor = "red";
+}
+if (document.getElementById('Zip').value == '') {
+requiredFields += "Fill in the zip of your city \n";
+document.getElementById('Zip').style.borderColor = "red";
+}
+if(requiredFields != '') {
+alert(requiredFields);
+return false;
+}
+
+}
+
+</script>
 </body>
 </html>

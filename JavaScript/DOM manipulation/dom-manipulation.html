@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
-    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" href="resources/css/stylesheet.css">
 
 </head>
 <body class="bg-dark pt-4">
@@ -100,6 +100,29 @@
         </div>
         <script>
             // Write your code here
+            let Name = document.getElementById('name');
+            let Pizza = document.getElementById('pizza');
+            let Size = document.getElementById('size');
+            let Remarks = document.getElementById('remarks');
+            document.addEventListener('keypress',function(e){
+            if (e.key =='Enter') {
+            if ((Name.value == "")||(Pizza.value == "")||(Size.value == "")) {
+              alert("All fields except for remarks have to be filled");
+            }
+            else {
+              var table = document.getElementById('pizzaOrders').getElementsByTagName('tbody')[0];
+              var row = table.insertRow(0);
+              var cell1 = row.insertCell(0);
+              var cell2 = row.insertCell(1);
+              var cell3 = row.insertCell(2);
+              var cell4 = row.insertCell(3);
+              cell1.innerHTML = Name.value;
+              cell2.innerHTML = Pizza.value;
+              cell3.innerHTML = Size.value;
+              cell4.innerHTML = Remarks.value;
+            }
+            }
+            });
         </script>
     </div>
     <!-- END OF Part 2 -->
@@ -129,6 +152,25 @@
         </div>
         <script>
             // Write your code here
+
+            function transform () {
+            let list = document.getElementById('listHolder');         
+            let spann = document.querySelectorAll('#listHolder > span');
+            ul = document.createElement('ul');
+            list.appendChild(ul);
+            for(i = 0;i < spann.length; i++) {
+                let li = document.createElement('li')
+                li.innerText = spann[i].innerHTML;
+                ul.appendChild(li);
+            }
+            let combo = document.querySelector('#listHolder > ul > li:last-child');        
+            let datalist = document.createElement('input');
+            combo.append(datalist);
+        }
+
+            let launch = document.getElementById('launchMe');
+            launch.addEventListener('click', transform)
+
         </script>
     </div>
     <!-- END OF Part 3 -->
@@ -331,6 +373,66 @@
         </div>
         <script>
             // Write your code here
+
+            //function move(){
+            //let box = document.getElementById("moveAnimation");
+            //if(box.style.left.replace("px","") < 1092 && check == true){
+            //moveRight(box);
+            //}else if (box.style.left.replace("px","") == 1092 || check == false)
+            //{
+
+            //if(box.style.left.replace("px","") > 0){
+            //check = false;
+            //moveleft(box);
+            //}else if (box.style.left.replace("px","") == 0){
+            //check = true;
+            //}
+            //}   
+            //}
+
+            //function moveRight(box){
+            //if(box.style.left != ""){
+            //let temp = box.style.left.replace("px","");
+            //temp = parseInt(temp);
+            //box.style.left = temp+1+"px";
+            //}else{box.style.left = "1px";}
+            //}
+
+            //function moveleft(box){
+            //if(box.style.left != ""){
+            //let temp = box.style.left.replace("px","");
+            //temp = parseInt(temp);
+            //box.style.left = temp-1+"px";
+            //}else{box.style.left = "1px";}
+            //}
+
+                //anime({
+                //targets: '.linear-easing-demo .el',
+                //translateX: 250,
+                //direction: 'alternate',
+                //loop: true,
+                //easing: 'linear'
+                //});
+        
+            setInterval(myMove,1000/10);
+
+            function myMove() {
+            var elem = document.getElementById("moveAnimation");   
+            var pos = 0;
+            var speed = 1
+            var id = setInterval(frame);
+            function frame() {
+  	        pos = pos + speed;
+            if (pos > 1092) {
+            speed = -2
+            } else if (pos < 0) {
+            speed = 1
+            }
+            elem.style.left = pos + "px"; 
+            }
+            }
+            
+
         </script>
     </div>
     <!-- END OF Part 5 -->

@@ -1,0 +1,37 @@
+#Canvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  #score {
+    text-align: center;
+    font-size: 120px;
+    font-family: 'Antic Slab', serif;
+  }
+
+  #play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 220px);
+  }
+
+  #reset {
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, 220px);
+  }
+
+  #musicbtn {
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, 220px);
+  }
+
+  body{
+      background-image: url(/resources/images/snaake.jpg);
+  }

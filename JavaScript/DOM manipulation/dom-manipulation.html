@@ -414,25 +414,23 @@
                 //easing: 'linear'
                 //});
         
-            setInterval(myMove,1000/10);
+            myMove();
 
             function myMove() {
             var elem = document.getElementById("moveAnimation");   
             var pos = 0;
-            var speed = 1
-            var id = setInterval(frame);
+            var speed = 300
+            var id = setInterval(frame, 1000/10);
             function frame() {
   	        pos = pos + speed;
             if (pos > 1092) {
-            speed = -2
+            speed = -9
             } else if (pos < 0) {
-            speed = 1
+            speed = 25
             }
             elem.style.left = pos + "px"; 
             }
             }
-            
-
         </script>
     </div>
     <!-- END OF Part 5 -->
@@ -449,6 +447,17 @@
         </div>
         <script>
             // Write your code here
+            window.onload = function(){
+                var bsDiv = document.getElementById("followMouse");
+                var x = 1092;
+                window.addEventListener('mousemove', function(event){
+                    x = event.clientX;                  
+                    if ( typeof x !== '1092' ){
+                        bsDiv.style.left = x + "px";
+                    }
+                }, false);
+            }
+      
         </script>
     </div>
     <!-- END OF Part 6 -->
@@ -458,7 +467,7 @@
         <div class="col-12 bg-white shadow-sm p-4 mx-auto mt-4">
             <h3>Part 7: Sliders</h3>
             <p>Recreate this very intuitive user interface. Insert the DOM nodes (html elements) using document.createElement();</p>
-            <img src="./input.gif" alt="Interface" />
+            <img src="resources/images/input.gif" alt="Interface" />
             <hr/>
             <br/>
 
@@ -466,6 +475,77 @@
         </div>
         <script>
             // Write your code here
+            let word = [];
+        const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]; 
+        let count = 0;
+        
+        const target = document.getElementById("target");
+        target.innerHTML = `
+            <label for="inputbox">Enter your first name:</label><br/ >
+            <input id="inputboxx" type="text"/><br/ ><br/ >
+            <div id="resultbox"></div><br/ >
+       `;
+        
+
+
+        const inputbox = document.getElementById("inputboxx");
+        const resultbox = document.getElementById("resultbox");
+        
+        inputbox.addEventListener("focus", start);
+        
+        function start(){
+            inputbox.disabled = true;
+            addAddLetterBtn();
+            addLetter();
+        }
+        
+        function addAddLetterBtn(){
+            let addLetterBtn = document.createElement("button");
+            addLetterBtn.innerText = "Add Letter";
+            addLetterBtn.id = "addLetter";
+            target.appendChild(addLetterBtn);
+            addLetterBtn.onclick = addLetter;
+        }
+        
+        function addLetter(){
+            word.push(0);
+            changeWord();
+            
+            resultbox.innerHTML += `
+                <div class="sliderContainer">
+                    <output>A</output>
+                    <input type="range" min="0" max="25" value="0" class="slider">
+                </div>
+            `;
+            
+            let inputs = document.querySelectorAll("#resultbox input");
+            for (let i = 0; i < inputs.length; i++){                
+                inputs[i].addEventListener("input", changeLetter);
+                inputs[i].value = word[i];
+            }
+        }
+        
+        function changeWord(){
+            inputbox.value = "";
+            for (let i = 0; i < word.length;i++){
+                inputbox.value += letters[word[i]];
+            }
+        }
+        
+        function changeLetter(){
+            let inputs = document.querySelectorAll("#resultbox input");
+            let outputs = document.querySelectorAll("#resultbox output");
+            
+            for (let i = 0; i < inputs.length; i++){
+                let val = inputs[i].value;                
+                word[i] = val;
+                outputs[i].value = letters[val];
+                changeWord();
+            }
+        }
+    </script>
+        
+
         </script>
     </div>
     <!-- END OF Part 7 -->
@@ -482,6 +562,7 @@
         </div>
         <script>
             // You can put at most one line here
+           
         </script>
     </div>
     <!-- END OF Part 8 -->

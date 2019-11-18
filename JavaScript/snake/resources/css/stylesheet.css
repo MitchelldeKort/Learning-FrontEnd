@@ -35,3 +35,11 @@
   body{
       background-image: url(/resources/images/snaake.jpg);
   }
+
+  #high-score{
+    color: white;
+  }
+
+  #list-hs {
+    color: white;
+  }

@@ -15,9 +15,12 @@
         <div class="wrapper">
             <button id="play">Play!</button>
             <button id="reset">Reset!</button>
-            <button class="scrid">Snake color<input type="color" id="head" value="#e66465"></button>
+            <button class="snekhead">Snake color<input type="color" id="head" value="#e66465"></button>
             <button class="scrid">Background <input type="color" id="body" ></button>
-            <button id="musicbtn">Music<audio id="music" src="resources/sound/Megalovania.mp3" loop autoplay></audio></button>
+            <button id="musicbtn">Music<audio id="music" src="resources/audio/system-of-a-down-chop-suey-shittyfluted.mp3" loop autoplay></audio></button>
+            <button id="easy">Easy Mode</button>
+            <button id="medium">Meh okay</button>
+            <button id="dark souls">Dying Simulator</button>
         </div>
         <div class = "scrid" id="score">score = 0 </div>
         <div class = "scrid" id="high-score">highscore = 0 </div>
@@ -65,9 +68,10 @@ function clearCanvas() {
     twod.fillRect(0, 0, canvas.width, canvas.height); 
     twod.strokeRect(0, 0, canvas.width, canvas.height);
 }
+//MUSICA
 const musicBut = document.getElementById('music');
-let musics = document.getElementById('musicbtn')
-musics.addEventListener('click', music);
+let musica = document.getElementById('musicbtn')
+musica.addEventListener('click', music);
 function music() {
     musicBut.play();
 }
@@ -132,6 +136,7 @@ function changeDirection(event) {
 function randomTen() { 
     return Math.round((Math.random() * (300 - 0) + 0) / 10) * 10;
 }
+
 //food
 function createFood() {
     foodX = randomTen(0, twod.width - 10); 
@@ -142,8 +147,22 @@ function createFood() {
     if (foodIsOnSnake){
     return createFood();
     }
-    });
-};
+});
+
+// SPHEEEDDDDDIIIEEEEEEEEEEEE
+
+   // if (foodIsOnSnake) {
+   // if (difficulty.value =="easy"){
+   // speed -= 1
+   // }
+   // if (difficulty.value == "medium"){
+   // speed -= 5
+   // }
+   // if (difficulty.value =="dark souls") {
+   // speed -= 10
+   // }
+   // }
+    };
 //field
 function drawFood() { 
     twod.fillStyle = 'red'; 
@@ -196,8 +215,8 @@ function didGameEnd() {
             if (score > highscore) {
                 document.getElementById('high-score').innerHTML = score + ' ' + 'highscore'
                 highscore = score
-                let winner = prompt('You got the highscore! Enter your username');
-                let playagain = alert('Insert coin to play again')
+                let winner = prompt('You got the highscore! Enter your name');
+                let playagain = alert('Lets try that again')
                 playagain;
                 let ol = document.getElementById('list-hs');
                 let li = document.createElement('li');
@@ -211,24 +230,26 @@ function didGameEnd() {
     
 }
    
+   // COLOR SNEK
 
 let select = document.getElementById('head');
     select.addEventListener('change',drawSnake);
-    select.value = '#00ff00'
+    select.value = '#0000ffff'
 
 
 function changeColor(snakePart) {
     let grd = twod.createLinearGradient(snake[0].x, snake[0].y, snake[snake.length - 1].x, snake[snake.length - 1].y);
         grd.addColorStop(0, select.value);
-        grd.addColorStop(1, "white");
+        grd.addColorStop(1, "transparent");
     twod.fillStyle = grd;
     twod.strokeStyle = 'black';
     twod.fillRect(snakePart.x, snakePart.y, 10, 10); 
     twod.strokeRect(snakePart.x, snakePart.y, 10, 10);
-    
-
-    
+        
 };
+
+// Canvas color
+
 let bg = document.getElementById('body');
     bg.addEventListener('change', backgroundcolor);
     bg.value = '#006400'

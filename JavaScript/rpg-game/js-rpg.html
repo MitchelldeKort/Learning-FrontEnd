@@ -5,76 +5,101 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="resources/css/stylesheet.css">
-    <script src="/resources/js/characters.js"></script>
-    <script src="/resources/js/gamelogic.js"></script>
-    <title>JS-rpg game</title>
+    <title>rpg.js</title>
 </head>
 <body>
-<div id="battlefield" class="battlefield">
-    <div id="playersumm1" class="playersum1">
-        <h1 id="player1">Player 1</h1>
-         <div id="stats1">
-            <input id="name1">
-            <select id="items1">
-             <option>boots</option>
-             <option>staff</option>
-             <option>sword</option>
-             <option>bow</option>
+    <h1 id="title">RPG game</h1>
+    <div id="create">
+        <div class="P1">
+            <select name="Race" id="race1">
+                <option value="human">Human</option>
+                <option value="orc"> Orc</option>
+                <option value="elf">Elf</option>
+                <option value="vampire">Vampire</option>
             </select>
-            <select id="race1">
-             <option>human</option>
-             <option>orc</option>
-             <option>elf</option>
-             <option>vampire</option>
+            <select name="Weapon" id="weapon1">
+                <option value="boots">Boots</option>
+                <option value="staff">Staff</option>
+                <option value="sword">Sword</option>
+                <option value="bow">Bow</option>
             </select>
-         </div>
-            <div id="combatSumm1" class="combatSumm">
-            <div id="racedisplay1"></div>
-            <div id="itemdisplay1"></div>
-            <div id="healthdata1"><div id="currenthealth1">Current health: </div> <progress id="health1" value="100" max="100"></progress> <div id="maxhealth1">Maxhealth: 100</div></div>            
-            <div id="moves1">
-            <button id="attack1">attack</button>
-            <button id="heal1">heal</button>
-            <button id="yield1">yield</button>
-            </div>
-            </div>
-         </div>
-</div>
-            <div id="playerSumm2" class="playerSum2">
-        
-                <h1 id="player2">Player 2</h1>
-                 <div id="stats2">
-                    <input id="name2">
-                        <select id="items2">
-                        <option>boots</option>
-                        <option>staff</option>
-                        <option>sword</option>
-                        <option>bow</option>
-                        </select>
-                        <select id="race2">
-                        <option>human</option>
-                        <option>orc</option>
-                        <option>elf</option>
-                        <option>vampire</option>
-                        </select>
-                    </div>
-    <div id="combatSumm2" class="combatSmm2">
-        <div id="raceDisplay2"></div>
-        <div id="itemDisplay2"></div>
-        <div id="healthData2"><div id="currentHealth2">Currenthealth: </div> <progress id="health2" value="100" max="100"></progress> <div id="maxHealth2">Maxhealth: 100</div></div> 
-        <div id="moves2">
-            <button id="attack2">attack</button>
-            <button id="heal2">heal</button>
-            <button id="yield2">yield</button>   
+            <input placeholder="Player1" id="name1" type="text">
+        </div>
+    
+        <div class="P2">
+            <select name="Race" id="race2">
+                <option value="human">Human</option>
+                <option value="orc"> Orc</option>
+                <option value="elf">Elf</option>
+               <option value="vampire">Vampire</option>
+           </select>
+            <select name="Weapon" id="weapon2">
+                <option value="boots">Boots</option>
+                <option value="staff">Staff</option>
+                <option value="sword">Sword</option>
+                <option value="bow">Bow</option>
+            </select>
+            <input placeholder="Player2" id="name2" type="text">
+        </div>
     </div>
-    </div>
-        
-    </div>        
-            
-    </div>
-        
-<button id="create1">Create players</button>
 
-<div class="cmbtlog" id="log">Log:<br></div>
+         <button id="play">Fight</button>
+
+    <div id="battlefield">
+        <div class="player1">
+            <div id="dis1" class="display">
+                <div class="character">
+                    <img id="displayrace1"></img>
+                    <p id="displayrace1C" class="chars"></p>
+                </div>
+                <div class="item1">
+                    <img id='displayitem1'></img>
+                    <p id='displayitem1C' class="chars"></p>
+                </div>
+            </div>
+            <p id="named1">Player1</p>
+            <div class="prog">
+                <progress id="health1" value="100" max="100"></progress>
+                <h1 id="healthtext1"></h1>
+            </div>
+            <div class="moves1">
+                <button id="attack1">Attack</button>
+                <button id="heal1">Heal</button>  
+                <button id="yield1">Yield</button>        
+            </div>                       
+        </div>
+        
+        <div class="player2">
+            <div id="dis2" class="display">
+               <div class="character2">
+                   <img id="displayrace2"></img>
+                   <p id="displayitem2C" class="chars2"></p>
+               </div>
+               <div class="item2">
+                   <img id='displayitem2'></img>
+                   <p id='displayrace2C'class="chars2"></p>
+               </div>
+           </div>
+            <p id="named2">player2</p>
+            <div class="prog">
+                    <h1 id="healthtext2"></h1>
+                <progress id="health2" value="100" max="100"></progress>
+            </div>
+            
+            <div class="moves2">
+                <button id="attack2">Attack</button>
+                <button id="heal2">Heal</button>  
+                <button id="yield2">Yield</button>        
+            </div>   
+        </div>
+    </div>
+    <!-----------<div class="proge">--------->
+        <div id="log">log :</div>
+      <!------</div>------>  
+   
+    
+
 </body>
+<script src="resources/js/gamelogic.js"></script>
+<script src="resources/js/characters.js"></script>
 </html>

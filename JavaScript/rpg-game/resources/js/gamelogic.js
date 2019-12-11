@@ -4,6 +4,8 @@ play.addEventListener('click', createPlayers);
 let player1;
 let player2;
 
+let playerContainer = [];
+
 let log = document.getElementById("log");
 function createPlayers(){
     let race1 = document.getElementById('race1').value;
@@ -13,6 +15,7 @@ function createPlayers(){
     }
     let weapon1 = document.getElementById('weapon1').value;
     player1 = new Person(name1,race1,weapon1);
+    playerContainer.push(player1);
     switch (player1.race) {
         case 'human':
             document.getElementById('displayrace1').src = '/resources/images/human2.jpg'
@@ -57,6 +60,7 @@ function createPlayers(){
     }
     let weapon2 = document.getElementById('weapon2').value;
     player2 = new Person(name2,race2,weapon2);
+    playerContainer.push(player2);
     switch (player2.race) {
         case 'human':
             document.getElementById('displayrace2').src= '/resources/images/human1.jpg'
@@ -105,25 +109,32 @@ function createPlayers(){
     document.getElementById('heal2').addEventListener("click",h2);
     log.insertAdjacentHTML("afterbegin",`${player1.name} is a ${player1.race}, he wields a ${player1.item}, his total health points are ${player1.maxHealth}.`+"<br>");
     log.insertAdjacentHTML("afterbegin",`${player2.name} is a ${player2.race}, he wields a ${player2.item}, his total health points are ${player2.maxHealth}.`+"<br>");
-    updatehealth();
+    updateHealth();
     console.log(player1,player2);
     
 }
 // active healthbar
-function updatehealth() {
-    document.getElementById("health1").value = player1.currenthealth;
+function updateHealth() {
+    let player1Health = document.getElementById("health1");
+    player1Health.value = playerContainer[0].currentHealth;
+    console.log(player1Health);
+    console.log(playerContainer[0])
     document.getElementById("health1").max = player1.maxHealth;
-    document.getElementById("health2").value = player2.currenthealth;
+
+    let player2Health = document.getElementById("health2");
+    player2Health.value = playerContainer[1].currentHealth;
+    console.log(player2Health);
+    console.log(playerContainer[1])
     document.getElementById("health2").max = player2.maxHealth;
-    document.getElementById("healthtext1").innerHTML = `${player1.currenthealth}/${player1.maxHealth}`;
-    document.getElementById("healthtext2").innerHTML = `${player2.currenthealth}/${player2.maxHealth}`
+    document.getElementById("healthtext1").innerHTML = `${player1.currentHealth}/${player1.maxHealth}`;
+    document.getElementById("healthtext2").innerHTML = `${player2.currentHealth}/${player2.maxHealth}`
 }
 // Needs moar deeeps
 let turn = true
 function a1() {
     turn = true;
     Damage();
-    updatehealth();
+    updateHealth();
     document.getElementById('heal1').removeEventListener("click",h1);
     document.getElementById('heal2').addEventListener("click",h2);
     document.getElementById('attack1').removeEventListener("click",a1);
@@ -132,7 +143,7 @@ function a1() {
 function a2 () {
     turn = false;
     Damage();
-    updatehealth()
+    updateHealth()
     document.getElementById('attack2').removeEventListener("click",a2);
     document.getElementById('attack1').addEventListener("click",a1);
     document.getElementById('heal2').removeEventListener("click",h2);
@@ -145,11 +156,15 @@ function Damage() {
     if (turn== true) {
         you = player1;
         enemy = player2;
+        console.log("test");
     }
     if (turn == false) {
         you = player2;
         enemy = player1;
+        console.log("test2");
     }
+
+    console.log(playerContainer[0].currenthealth);
     
     let chance = enemy.dodgechance;
     let n = Math.floor(Math.random() * 101); 
@@ -158,16 +173,16 @@ function Damage() {
         log.insertAdjacentHTML("afterbegin",`${enemy.name} dodged the attack.`+"<br>");
     } else {
         let damage = (Math.round(Math.random()*(you.maxDamage - you.minD +1))+you.minD);
-        enemy.currenthealth -= damage ;
+        enemy.currentHealth -= damage ;
         log.insertAdjacentHTML("afterbegin",`${you.name} did ${damage} damage to ${enemy.name}.`+"<br>");   
     }
     
     if (you.race == "vampire") {
-        if (you.currenthealth >= you.maxHealth) {
-            you.currenthealth = you.maxHealth;
+        if (you.currentHealth >= you.maxHealth) {
+            you.currentHealth = you.maxHealth;
         }else{
-            you.currenthealth += Math.ceil(damage/5)
-            log.insertAdjacentHTML("afterbegin",`${you.name} stole ${Math.ceil(damage/5)} health from ${enemy.name} .`+"<br>")
+            you.currentHealth += Math.ceil(Damage/5)
+            log.insertAdjacentHTML("afterbegin",`${you.name} stole ${Math.ceil(Damage/5)} health from ${enemy.name} .`+"<br>")
         }
         
     }
@@ -175,44 +190,21 @@ function Damage() {
         let r = Math.random() * 100;
         if (r < 30) {
             damage = (Math.round(Math.random()*(you.maxDamage - you.minD +1))+you.minD);
-            enemy.currenthealth -= damage ;
+            enemy.currentHealth -= damage ;
             log.insertAdjacentHTML("afterbegin",`${you.name} attacked again, and did${damage} damage to ${enemy.name}.`+"<br>");
             if (you.race == "vampire") {
-                if (you.currenthealth >= you.maxHealth) {
-                    you.currenthealth = you.maxHealth;
+                if (you.currentHealth >= you.maxHealth) {
+                    you.currentHealth = you.maxHealth;
                 }else{
-                    you.currenthealth += Math.ceil(damage/5)
+                    you.currentHealth += Math.ceil(damage/5)
                     log.insertAdjacentHTML("afterbegin",`${you.name} stole ${Math.ceil(damage/5)} health from ${enemy.name} .`+"<br>")
                 }
             }
         }
     }
 
-// who goes first random generator
-
-//let whoGoesFirst = Math.floor((Math.random() * 2) + 1);
-
-  //  console.log(whoGoesFirst);
-
-    //if (whoGoesFirst == 1) { 
-      //  log.innerHTML += `${player1.name} goes first <br/>`
-        //attack2.style.pointerEvents = `none`;
-        //heal2.style.pointerEvents = `none`;
-        //yield2.style.pointerEvents = `none`;
-       // scrollLog()
-   // } else {
-     //   log.innerHTML += `${player2.name} goes first <br/>`
-      //  attack1.style.pointerEvents = `none`;
-       // heal1.style.pointerEvents = `none`;
-       // yield1.style.pointerEvents = `none`;
-        //scrollLog()
-   // }
-
-
-
-
 // U succ , wanna try it again?
-    if (enemy.currenthealth <= 0) {
+    if (enemy.currentHealth <= 0) {
         Endgame(enemy);
         
     }
@@ -240,7 +232,7 @@ function Endgame(enemy) {
 function h1() {
     turn = true;
     Heal();
-    updatehealth()
+    updateHealth()
     document.getElementById('heal1').removeEventListener("click",h1);
     document.getElementById('heal2').addEventListener("click",h2);
     document.getElementById('attack1').removeEventListener("click",a1);
@@ -249,7 +241,7 @@ function h1() {
 function h2() {
     turn = false;
     Heal();
-    updatehealth()
+    updateHealth()
     document.getElementById('heal2').removeEventListener("click",h2);
     document.getElementById('heal1').addEventListener("click",h1);
     document.getElementById('attack2').removeEventListener("click",a2);
@@ -265,13 +257,13 @@ function Heal() {
     }
     
     let heal = (Math.round(Math.random()*(you.maxHealing - you.minH +1))+you.minH);
-    you.currenthealth += heal
+    you.currentHealth += heal
     log.insertAdjacentHTML("afterbegin",`${you.name} healed for ${heal}.`+"<br>");
-    if (you.currenthealth >= you.maxHealth) {
-        you.currenthealth = you.maxHealth;
+    if (you.currentHealth >= you.maxHealth) {
+        you.currentHealth = you.maxHealth;
     }
 }
-// y are you running? function
+// y r u running? 
 document.getElementById('yield1').addEventListener("click",function () {
     log.insertAdjacentHTML("afterbegin", `${player1.name} has yielded.`+"<br>");
     document.getElementById('title').innerHTML = "GAME OVER"

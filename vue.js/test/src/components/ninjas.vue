@@ -1,15 +1,14 @@
 <template>
-  <div>
-   <h1>{{ title }}</h1>
-
-  </div>
+<ul>
+    <li v-for="ninja in Ninjas"{{ ninja }}></li>
+</ul>
 </template>
 
 <script>
 export default {
   data() {
     return  {
-      title : 'Ninja App'
+    Ninjas:['Yoshi', 'Mario', 'Ryu']
     }
   }
 }
